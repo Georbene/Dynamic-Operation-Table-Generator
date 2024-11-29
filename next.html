@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <section class="sec">
+    <label for="colNum">Column:</label>
+    <input type="number" id="colNum"> <br>
+    <label for="rowNum">Row:</label>
+    <input type="number" id="rowNum"> <br>
+    <select id="operationSelect">
+                    <option selected value="+">ADD</option>
+                    <option value="-">SUBSTRACT</option>
+                    <option value="*">MULTIPLY</option>
+                    <option value="/">DIVIDE</option>
+                </select> <br>
+                <button onclick="display()">Make me a table</button>
+    </section>
+    <div id="showResult"></div>
+        <script>
+          function display() {
+            let colNum = document.getElementById('colNum').value;
+            let rowNum = document.getElementById('rowNum').value;
+            let operation = document.getElementById('operationSelect').value;
+            let table = "<table>";
+              for (let i=1; i<= rowNum; i++){
+                table +="<tr>";
+                for(let j=1; j <= colNum; j++){
+                  let result = evaluateOperation(j, i, operation);
+                  table += "<td>" + j + operation + i + "=" + result + "</td>"
+                }
+                // num.innerHTML += `<h4> ${i} + ${j}</h4>` 
+                table += "</tr>";
+              }
+              table += "</table>" 
+              document.getElementById('showResult').innerHTML = table;  
+            }
+            function evaluateOperation(num1, num2, operation) {
+              num1 = Number(num1);
+              num2 = Number(num2);
+
+              switch (operation){
+                case '+':
+                return num1 + num2;
+                case '-':
+                return num1 - num2;
+                case '*':
+                return num1 * num2; 
+                case '/':
+                return num1 / num2;
+                default:
+                  return 0; 
+              }
+            }
+    </script>
+  </body>
+</html>
